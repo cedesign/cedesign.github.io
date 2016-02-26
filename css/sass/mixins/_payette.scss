@@ -1,9 +1,0 @@
-// Payette-specific mixins. We may add some of these to the Framework. We may not.
-
-// This splits elements into simple, equal columns within a container. Defaults to 2 columns with a 2% gutter.
-
-@mixin split-me($cols:2, $gut:2) {
-	float: left;
-	width: 100% / $cols - $gut * ($cols - 1);
-	margin-right: percentage($gut / 100);
-}
