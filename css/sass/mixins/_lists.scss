@@ -1,0 +1,221 @@
+/**
+ * List styling and overrides.
+ *
+ * @author Drake Cooper
+ * @link http://www.drakecooper.com
+ * @copyright (c) 2011, Drake Cooper. All rights reserved.
+ * @info This is a custom file and may not be used, modified, or reproduced
+ * without express permission of Drake Cooper.
+ */
+
+
+$list-padding-left:                 2.5 * $base-font-size   !default;
+
+$list-tree-border-color:            $font-color             !default;
+$list-tree-mask-color:              white                   !default;
+
+$dl-horizontal-column-width:        grid-width(5)           !default;
+$dl-horizontal-gutter-width:        $grid-gutter            !default;
+$dl-horizontal-column-width-wide:   grid-width(7)           !default;
+
+
+
+//------------------------------------------------------
+//
+//    List Reset
+//
+//------------------------------------------------------
+
+@mixin list-reset() {
+	menu ul, menu ol,
+	nav ul, nav ol {
+		margin:0;
+		li { list-style:none; }
+	}
+	menu {
+		margin: 0;
+		padding: 0;
+	}
+	.xoxo {
+		margin: 0;
+		> li { list-style:none; }
+	}
+
+	dl { margin:0; }
+	dt { font-weight:normal;
+		code { font-style:normal; }
+	}
+	dd { padding:0; margin:0 0 $baseline 1em; }
+
+	ol, ul {
+		display:block;
+		@include line-height;
+		@include margin(1, $v:1, $l:$list-padding-left);
+		padding:0;
+		&.unstyled {
+			list-style:none;
+			padding-left:0;
+		}
+	}
+	ol li > ol, ol li > ul,
+	ul li > ul, ul li > ol {
+		margin:0;
+		padding:0 0 0 $list-padding-left;
+	}
+	td > ul, td > ol { padding-right:10px; }
+
+	ol { list-style-type:decimal; }
+	ul { list-style:disc; }
+	ol ol { list-style:upper-alpha; }
+	ol ol ol { list-style:lower-roman; }
+	ol ol ol ol { list-style:lower-alpha; }
+	li { display:list-item; }
+	li a * { cursor:pointer; }
+
+}
+
+
+//------------------------------------------------------
+//
+//    File Structure Tree
+//
+//------------------------------------------------------
+
+@mixin list-tree() {
+
+	ul.list-tree,
+	ul.list-tree ul {
+		border-left: 1px solid $list-tree-border-color;
+		list-style: none;
+		margin: 0;
+		padding: 0;
+	}
+	ul.list-tree {
+		ul { margin-left: 9px; }
+		li {
+			margin-left: -1px;
+			padding-left: 10px;
+			position: relative;
+			&:before {
+				border-bottom: 1px solid $list-tree-border-color;
+				content: "";
+				height: $baseline/2;
+				left: 0;
+				position: absolute;
+				width: 5px;
+			}
+			&:last-child {
+				border-left: 1px solid $list-tree-mask-color;
+				&:before {
+					border-left: 1px solid $list-tree-border-color;
+					left: -1px;
+					width: 4px;
+				}
+			}
+		}
+		nav, menu, div { // remove list-tree
+			ul {
+				border: 0;
+				margin-left: 0;
+				ul { margin-left: $list-padding-left; }
+			}
+			li, li:last-child {
+				border: 0;
+				margin-left: 0;
+				padding-left: 0;
+				&:before {
+					display: none;
+				}
+			}
+		}
+	}
+}
+
+
+//------------------------------------------------------
+//
+//    Horizontal Data List
+//
+//------------------------------------------------------
+
+@mixin list-data-horizontal() {
+
+	dl.dl-horizontal {
+		dt {
+			clear: left;
+			float: left;
+			overflow: hidden;
+			text-align: right;
+			text-overflow: ellipsis;
+			white-space: nowrap;
+			width: $dl-horizontal-column-width;
+		}
+		dd {
+			margin-left: $dl-horizontal-column-width + $dl-horizontal-gutter-width;
+		}
+		&.wide {
+			dt { width: $dl-horizontal-column-width-wide; }
+			dd { margin-left: $dl-horizontal-column-width-wide + $dl-horizontal-gutter-width; }
+		}
+	}
+
+	dl.toc,
+	dl.table-of-contents {
+		margin-bottom: $baseline;
+		dt {
+			float: left;
+			text-align: left;
+			padding-right: .2em;
+		}
+		dd {
+			display: block;
+			height: $baseline;
+			text-align: right;
+			margin-bottom: 0;
+			> * {
+				float:right;
+				padding-left: .2em;
+			}
+		}
+		&.dot-leaders dd:after {
+			border-bottom: 1px dotted $dt-color;
+			content: "";
+			display: block;
+			height: $baseline - 5;
+			overflow: hidden;
+		}
+	}
+}
+
+
+//------------------------------------------------------
+//
+//    Line Numbers List
+//
+//------------------------------------------------------
+
+@mixin list-linenums() {
+
+	ol.linenums {
+		padding-left: $list-padding-left;
+		padding-bottom:0;
+	}
+}
+
+
+//------------------------------------------------------
+//
+//    Quick Includes
+//
+//------------------------------------------------------
+
+@mixin lists() {
+	@include list-reset;
+}
+
+@mixin lists-kitchen-sink() {
+	@include lists;
+	@include list-tree;
+	@include list-data-horizontal;
+	@include list-linenums;
+}

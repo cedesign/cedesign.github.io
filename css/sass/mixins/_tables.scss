@@ -1,0 +1,254 @@
+///**
+// * Table styling and overrides.
+// *
+// * @author Drake Cooper
+// * @link http://www.drakecooper.com
+// * @copyright (c) 2011, Drake Cooper. All rights reserved.
+// * @info This is a custom file and may not be used, modified, or reproduced
+// * without express permission of Drake Cooper.
+// */
+
+
+$table-padding-top-bottom: $base-font-size * .4            !default;
+$table-padding-left-right: $table-padding-top-bottom * 2.5 !default;
+$td-background-color:      #f9fafb                         !default;
+$th-background-color:      darken($td-background-color,20) !default;
+$table-border-color:       darken($td-background-color,30) !default;
+$table-border-width:       1px                             !default;
+$table-border-radius:      $default-border-radius          !default;
+
+
+
+
+
+
+
+//------------------------------------------------------
+//
+//    Table Padding
+//
+//------------------------------------------------------
+
+@mixin table-padding() {
+
+	table { margin-bottom:$baseline; }
+	td, th { padding:0; }
+
+	table.pad td, table.pad th       { padding:$table-padding-top-bottom $table-padding-left-right; }
+	table.pad-h td, table.pad-h th   { padding-left:$table-padding-left-right; padding-right:$table-padding-left-right; }
+	table.pad-v td, table.pad-v th   { padding-top:$table-padding-top-bottom; padding-bottom:$table-padding-top-bottom; }
+
+	td, th { @include line-height($base-font-size); }
+	table.border {
+		td, th { @include line-height($base-font-size, -$table-border-width); }
+	}
+	table.pad td, table.pad th { @include padding(1, $l:$table-padding-left-right, $r:$table-padding-left-right); }
+	table.pad.border, table.pad.border-h,
+	table.border.pad, table.border-h.pad {
+		td, th {
+			@include line-height($base-font-size);
+			@include padding(1, $l:$table-padding-left-right, $r:$table-padding-left-right, $t:-$table-border-width);
+		}
+	}
+	table.pad.outline, table.outline.pad {
+		*:first-child tr:first-child {
+			td, th { @include padding(1, $l:$table-padding-left-right, $r:$table-padding-left-right, $t:-$table-border-width); }
+		}
+	}
+	table.pad-h td, table.pad-h th   { padding-left:$table-padding-left-right; padding-right:$table-padding-left-right; }
+	table.pad-v td, table.pad-v th   { @include padding(1); }
+}
+
+
+//------------------------------------------------------
+//
+//    Table Border and Border Radius
+//
+//------------------------------------------------------
+
+@mixin table-border() {
+
+	table {
+/*
+		border-style: solid;
+		border-color: $table-border-color;
+		border-width: 0;
+*/
+		border-collapse:separate;
+		*border-collapse: collapse;
+		caption + thead,
+		caption + tbody,
+		caption + tbody,
+		colgroup + thead,
+		colgroup + tbody,
+		colgroup + tbody,
+		> *:first-child { tr:first-child { th, td { border-top: 0; } } }
+//		th + th, td + td, th + td, td + th { border-left:$table-border-width solid $table-border-color; }
+	}
+
+
+	table.border {
+		border-style: solid;
+		border-color: $table-border-color;
+		border-width: $table-border-width $table-border-width $table-border-width 0;
+		margin-bottom:$baseline - $table-border-width;
+		th, td {
+			border-left: $table-border-width solid $table-border-color;
+			border-top: $table-border-width solid $table-border-color;
+		}
+	}
+	table.border-h {
+		border-top: $table-border-width solid $table-border-color;
+		border-bottom: $table-border-width solid $table-border-color;
+		margin-bottom:$baseline - $table-border-width;
+		th, td {
+			border-top: $table-border-width solid $table-border-color;
+		}
+	}
+	table.border-v {
+		border-right: $table-border-width solid $table-border-color;
+		th, td {
+			border-left: $table-border-width solid $table-border-color;
+		}
+	}
+
+	table.outline {
+		margin-bottom:$baseline - $table-border-width;
+		border:$table-border-width solid $table-border-color;
+		&.border, &.border-v {
+			border-left-width: 0;
+		}
+	}
+}
+
+
+@mixin table-border-radius() {
+
+	table.corners { @include border-radius($table-border-radius); }
+	thead.corners tr:first-child > *:first-child,
+	table.corners *:first-child > tr:first-child > *:first-child { @include border-top-left-radius($table-border-radius); }
+	thead.corners tr:first-child > *:last-child,
+	table.corners *:first-child > tr:first-child > *:last-child  { @include border-top-right-radius($table-border-radius); }
+	tfoot.corners tr:last-child  > *:first-child,
+	table.corners *:last-child > tr:last-child  > *:first-child { @include border-bottom-left-radius($table-border-radius); }
+	tfoot.corners tr:last-child  > *:last-child,
+	table.corners *:last-child > tr:last-child  > *:last-child  { @include border-bottom-right-radius($table-border-radius); }
+}
+
+
+//------------------------------------------------------
+//
+//    Table Zebra Striping
+//    NEED jQuery for IE!
+//
+//------------------------------------------------------
+
+@mixin table-zebra-striping(
+				$th-bg:      darken($th-background-color,5%),
+				$th-bg-dark: darken($th-background-color,8%),
+
+				$td-bg:      darken($td-background-color,3%),
+				$td-bg-mid:  darken($td-background-color,5%),
+				$td-bg-dark: darken($td-background-color,8%),
+
+				$bg-hover:   darken($td-background-color,12%)
+		) {
+
+	table.zebra, table.zebra-v,
+	thead.zebra, thead.zebra-v {
+		th:nth-child(2n) { background:none $th-bg; }
+	}
+	table.zebra, table.zebra-h,
+	thead.zebra, thead.zebra-h {
+		tr:nth-child(2n) th { background:none $th-bg; }
+	}
+	table.zebra,
+	thead.zebra {
+		tr:nth-child(2n) th:nth-child(2n) { background:none $th-bg-dark; }
+	}
+
+	table.zebra, table.zebra-v,
+	tbody.zebra, tbody.zebra-v {
+		tr td:nth-child(2n) { background:none $td-bg; }
+	}
+	table.zebra, table.zebra-h,
+	tbody.zebra, tbody.zebra-h {
+		tr:nth-child(2n) td { background:none $td-bg-mid; }
+	}
+	table.zebra,
+	tbody.zebra {
+		tr:nth-child(2n) td:nth-child(2n) { background:none $td-bg-dark; }
+	}
+
+	// hover
+	table.hover tr:hover td { background:none $bg-hover; }
+
+	table.zebra.hover, table.zebra-v.hover, table.hover.zebra, table.hover.zebra-v,
+	tbody.zebra.hover, tbody.zebra-v.hover, tbody.hover.zebra, tbody.hover.zebra-v {
+		tr:hover td:nth-child(2n) { background:none $bg-hover; }
+	}
+	table.zebra.hover, table.zebra-h.hover, table.hover.zebra, table.hover.zebra-h,
+	tbody.zebra.hover, tbody.zebra-h.hover, tbody.hover.zebra, tbody.hover.zebra-h {
+		tr:nth-child(2n):hover td { background:none $bg-hover; }
+	}
+	table.zebra.hover,
+	table.hover.zebra {
+		tr:nth-child(2n):hover td:nth-child(2n) { background:none $bg-hover; }
+	}
+}
+
+
+//------------------------------------------------------
+//
+//    .default Table Style
+//
+//    I prefer to keep the DEFAULT table style without
+//    any styling. This allows for tables to still be
+//    used for structure, if absolutely necessary.
+//
+//------------------------------------------------------
+
+@mixin table-default() {
+
+	table.default {
+		td { background:none $td-background-color; }
+			thead th,
+			thead td {
+			background:none $th-background-color;
+			vertical-align:bottom;
+		}
+		thead th,
+		tbody th {
+			background:none $th-background-color;
+			color:#fff;
+			font-size:.8em;
+			font-style:normal;
+			text-transform:uppercase;
+		}
+		@extend table.pad;
+		@extend table.hover;
+		@extend table.outline;
+		@extend table.border-v;
+		@extend table.corners;
+		@extend table.zebra-h;
+	}
+}
+
+
+//------------------------------------------------------
+//
+//    Quick Includes
+//
+//------------------------------------------------------
+
+@mixin tables() {
+	@include table-padding;
+	@include table-border;
+	@include table-border-radius;
+}
+
+@mixin tables-kitchen-sink() {
+	@include tables;
+	@include table-zebra-striping;
+}
+//@include table-default;

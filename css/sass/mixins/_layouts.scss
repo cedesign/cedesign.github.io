@@ -1,0 +1,495 @@
+
+//------------------------------------------------------
+//
+//    LAYOUT: default one-column, Fixed
+//
+//------------------------------------------------------
+
+$grid-columns:             24                   !default;
+
+$layout-padding-t-b:       0                    !default;
+$layout-padding-l-r:       0                    !default;
+
+$header-width:             $grid-columns        !default;
+$header-padding-top:       $layout-padding-t-b  !default;
+$header-padding-right:     $layout-padding-l-r  !default;
+$header-padding-bottom:    $layout-padding-t-b  !default;
+$header-padding-left:      $layout-padding-l-r  !default;
+
+$container-width:          $grid-columns        !default;
+$container-padding-top:    $layout-padding-t-b  !default;
+$container-padding-right:  $layout-padding-l-r  !default;
+$container-padding-bottom: $layout-padding-t-b  !default;
+$container-padding-left:   $layout-padding-l-r  !default;
+
+$aside-width:              $grid-columns        !default;
+$aside-padding-top:        $layout-padding-t-b  !default;
+$aside-padding-right:      $layout-padding-l-r  !default;
+$aside-padding-bottom:     $layout-padding-t-b  !default;
+$aside-padding-left:       $layout-padding-l-r  !default;
+
+$footer-width:             $grid-columns        !default;
+$footer-padding-top:       $layout-padding-t-b  !default;
+$footer-padding-right:     $layout-padding-l-r  !default;
+$footer-padding-bottom:    $layout-padding-t-b  !default;
+$footer-padding-left:      $layout-padding-l-r  !default;
+
+$wrapper:                  '#wrapper'           !default;
+$header:                   '#header'            !default;
+$main:                     '#main'              !default;
+$container:                '#container'         !default;
+$aside-primary:            '#primary'           !default;
+$aside-secondary:          '#secondary'         !default;
+$footer:                   '#footer'            !default;
+
+
+
+
+//------------------------------------------------------
+//
+//    layout
+//
+//------------------------------------------------------
+
+@mixin layout(
+							$header-width:          $header-width,
+							$container-width:       $container-width,
+							$aside-primary-width:   $aside-primary-width,
+							$aside-secondary-width: $aside-secondary-width,
+							$footer-width:          $footer-width,
+
+							$wrapper:               $wrapper,
+							$header:                $header,
+							$main:                  $main,
+							$container:             $container,
+							$aside-primary:         $aside-primary,
+							$aside-secondary:       $aside-secondary,
+							$footer:                $footer
+						) {
+
+	#{$wrapper} {
+		@include container;
+	}
+	@if $header != null {
+		#{$header} {
+			@include grid(
+									$header-width,
+									$t:$header-padding-top,
+									$r:$header-padding-right,
+									$b:$header-padding-bottom,
+									$l:$header-padding-left
+								);
+		}
+	}
+	#{$main} {
+		@include pie-clearfix;
+	}
+	#{$container} {
+		@include grid(
+									$container-width,
+									$t:$container-padding-top,
+									$r:$container-padding-right,
+									$b:$container-padding-bottom,
+									$l:$container-padding-left
+								);
+	}
+	@if $aside-primary == $aside-secondary {
+		#{$aside-primary} {
+			@include grid(
+									$aside-primary-width,
+									$t:$aside-padding-top,
+									$r:$aside-padding-right,
+									$b:$aside-padding-bottom,
+									$l:$aside-padding-left
+								);
+		}
+	} @else {
+		#{$aside-primary} {
+			@include grid(
+									$aside-primary-width,
+									$t:$aside-padding-top,
+									$r:$aside-padding-right,
+									$b:$aside-padding-bottom,
+									$l:$aside-padding-left
+								);
+		}
+		#{$aside-secondary} {
+			@include grid(
+									$aside-secondary-width,
+									$t:$aside-padding-top,
+									$r:$aside-padding-right,
+									$b:$aside-padding-bottom,
+									$l:$aside-padding-left
+								);
+		}
+	}
+	#{$footer} {
+		@include container;
+		footer {
+			@include grid(
+									$footer-width,
+									$t:$footer-padding-top,
+									$r:$footer-padding-right,
+									$b:$footer-padding-bottom,
+									$l:$footer-padding-left
+								);
+		}
+	}
+
+}
+
+
+//------------------------------------------------------
+//
+//    Sticky Footer
+//    Inspired by Ryan Fait http://ryanfait.com/
+//
+//------------------------------------------------------
+
+$footer-height:$baseline * 6 !default;
+
+@mixin sticky-footer(
+				$footer-height:   $footer-height,
+				$root-selector:   unquote("#wrapper"),
+				$footer-selector: unquote("#footer")
+		) {
+	html, body { height:100%; }
+	#{$root-selector} {
+		min-height:100%;
+		height:auto !important;
+		height:100%;
+		margin-bottom:-$footer-height;
+		&:after {
+			content:"";
+			display:block;
+			height:$footer-height;
+		}
+	}
+	#{$footer-selector} {
+		clear: both;
+		height:$footer-height;
+		margin-top:-$footer-height;
+	}
+}
+
+
+//------------------------------------------------------
+//
+//    layout one column fixed
+//
+//------------------------------------------------------
+
+@mixin layout-1c-fixed(
+							$header-width:          $grid-columns,
+							$container-width:       $grid-columns,
+							$aside-primary-width:   $grid-columns,
+							$aside-secondary-width: $grid-columns,
+							$footer-width:          $grid-columns,
+
+							$wrapper:               $wrapper,
+							$header:                $header,
+							$main:                  $main,
+							$container:             $container,
+							$aside-primary:         $aside-primary,
+							$aside-secondary:       $aside-secondary,
+							$footer:                $footer
+						) {
+
+	@include layout($header-width,
+									$container-width,
+									$aside-primary-width,
+									$aside-secondary-width,
+									$footer-width,
+
+									$wrapper,
+									$header,
+									$main,
+									$container,
+									$aside-primary,
+									$aside-secondary,
+									$footer );
+}
+
+
+//------------------------------------------------------
+//
+//    layout one column split fixed
+//
+//------------------------------------------------------
+
+@mixin layout-1c-split-fixed(
+							$header-width:          $grid-columns,
+							$container-width:       $grid-columns,
+							$aside-primary-width:   $grid-columns/2,
+							$aside-secondary-width: $grid-columns/2,
+							$footer-width:          $grid-columns,
+
+							$wrapper:               $wrapper,
+							$header:                $header,
+							$main:                  $main,
+							$container:             $container,
+							$aside-primary:         $aside-primary,
+							$aside-secondary:       $aside-secondary,
+							$footer:                $footer
+						) {
+
+	@include layout($header-width,
+									$container-width,
+									$aside-primary-width,
+									$aside-secondary-width,
+									$footer-width,
+
+									$wrapper,
+									$header,
+									$main,
+									$container,
+									$aside-primary,
+									$aside-secondary,
+									$footer );
+}
+
+
+//------------------------------------------------------
+//
+//    layout two column left fixed
+//
+//------------------------------------------------------
+
+@mixin layout-2c-l-fixed(
+							$header-width:          $grid-columns,
+							$container-width:       ($grid-columns/4) * 3,
+							$aside-primary-width:   $grid-columns/4,
+							$aside-secondary-width: $grid-columns/4,
+							$footer-width:          $grid-columns,
+
+							$wrapper:               $wrapper,
+							$header:                $header,
+							$main:                  $main,
+							$container:             $container,
+							$aside-primary:         $aside-primary,
+							$aside-secondary:       $aside-secondary,
+							$footer:                $footer
+						) {
+
+	@include layout($header-width,
+									$container-width,
+									$aside-primary-width,
+									$aside-secondary-width,
+									$footer-width,
+
+									$wrapper,
+									$header,
+									$main,
+									$container,
+									$aside-primary,
+									$aside-secondary,
+									$footer );
+
+	#{$container} {
+		float: right;
+	}
+	@if $aside-primary == $aside-secondary {
+		#{$aside-primary} {
+			clear: left;
+		}
+	} @else {
+		#{$aside-primary} {
+			clear: left;
+		}
+		#{$aside-secondary} {
+			clear: left;
+		}
+	}
+}
+
+
+//------------------------------------------------------
+//
+//    layout two column right fixed
+//
+//------------------------------------------------------
+
+@mixin layout-2c-r-fixed(
+							$header-width:          $grid-columns,
+							$container-width:       ($grid-columns/4) * 3,
+							$aside-primary-width:   $grid-columns/4,
+							$aside-secondary-width: $grid-columns/4,
+							$footer-width:          $grid-columns,
+
+							$wrapper:               $wrapper,
+							$header:                $header,
+							$main:                  $main,
+							$container:             $container,
+							$aside-primary:         $aside-primary,
+							$aside-secondary:       $aside-secondary,
+							$footer:                $footer
+						) {
+
+	@include layout($header-width,
+									$container-width,
+									$aside-primary-width,
+									$aside-secondary-width,
+									$footer-width,
+
+									$wrapper,
+									$header,
+									$main,
+									$container,
+									$aside-primary,
+									$aside-secondary,
+									$footer );
+
+	@if $aside-primary == $aside-secondary {
+		#{$aside-primary} {
+			clear: right;
+			float: right;
+		}
+	} @else {
+		#{$aside-primary} {
+			clear: right;
+			float: right;
+		}
+		#{$aside-secondary} {
+			clear: right;
+			float: right;
+		}
+	}
+}
+
+
+//------------------------------------------------------
+//
+//    layout three column fixed
+//
+//------------------------------------------------------
+
+@mixin layout-3c-fixed(
+							$header-width:          $grid-columns,
+							$container-width:       $grid-columns/2,
+							$aside-primary-width:   $grid-columns/4,
+							$aside-secondary-width: $grid-columns/4,
+							$footer-width:          $grid-columns,
+
+							$wrapper:               $wrapper,
+							$header:                $header,
+							$main:                  $main,
+							$container:             $container,
+							$aside-primary:         $aside-primary,
+							$aside-secondary:       $aside-secondary,
+							$footer:                $footer
+						) {
+
+	@include layout($header-width,
+									$container-width,
+									$aside-primary-width,
+									$aside-secondary-width,
+									$footer-width,
+
+									$wrapper,
+									$header,
+									$main,
+									$container,
+									$aside-primary,
+									$aside-secondary,
+									$footer );
+
+	#{$container} {
+		@include push($aside-primary-width);
+	}
+	#{$aside-primary} {
+		@include pull($container-width);
+	}
+}
+
+
+//------------------------------------------------------
+//
+//    layout three column left fixed
+//
+//------------------------------------------------------
+
+@mixin layout-3c-l-fixed(
+							$header-width:          $grid-columns,
+							$container-width:       $grid-columns/2,
+							$aside-primary-width:   $grid-columns/4,
+							$aside-secondary-width: $grid-columns/4,
+							$footer-width:          $grid-columns,
+
+							$wrapper:               $wrapper,
+							$header:                $header,
+							$main:                  $main,
+							$container:             $container,
+							$aside-primary:         $aside-primary,
+							$aside-secondary:       $aside-secondary,
+							$footer:                $footer
+						) {
+
+	@include layout($header-width,
+									$container-width,
+									$aside-primary-width,
+									$aside-secondary-width,
+									$footer-width,
+
+									$wrapper,
+									$header,
+									$main,
+									$container,
+									$aside-primary,
+									$aside-secondary,
+									$footer );
+
+	#{$container} {
+		@include push($aside-primary-width + $aside-secondary-width);
+	}
+
+	@if $aside-primary == $aside-secondary {
+		#{$aside-primary} {
+			@include pull($container-width);
+		}
+	} @else {
+		#{$aside-primary} {
+			@include pull($container-width);
+		}
+		#{$aside-secondary} {
+			@include pull($container-width);
+		}
+	}
+}
+
+
+//------------------------------------------------------
+//
+//    layout three column right fixed
+//
+//------------------------------------------------------
+
+@mixin layout-3c-r-fixed(
+							$header-width:          $grid-columns,
+							$container-width:       $grid-columns/2,
+							$aside-primary-width:   $grid-columns/4,
+							$aside-secondary-width: $grid-columns/4,
+							$footer-width:          $grid-columns,
+
+							$wrapper:               $wrapper,
+							$header:                $header,
+							$main:                  $main,
+							$container:             $container,
+							$aside-primary:         $aside-primary,
+							$aside-secondary:       $aside-secondary,
+							$footer:                $footer
+						) {
+
+	@include layout($header-width,
+									$container-width,
+									$aside-primary-width,
+									$aside-secondary-width,
+									$footer-width,
+
+									$wrapper,
+									$header,
+									$main,
+									$container,
+									$aside-primary,
+									$aside-secondary,
+									$footer );
+}

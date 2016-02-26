@@ -1,0 +1,78 @@
+/**
+ * Grid lists: .menu-detail, .menu-thumb
+ *
+ * @author Drake Cooper
+ * @link http://www.drakecooper.com
+ * @copyright (c) 2011, Drake Cooper. All rights reserved.
+ * @info This is a custom file and may not be used, modified, or reproduced
+ * without express permission of Drake Cooper.
+ */
+
+
+$grid-margin:                     10px                                        !default;
+
+$grid-list-item-padding:          0                                           !default;
+$grid-list-item-margin-bottom:    $baseline                                   !default;
+$grid-list-item-width:            6                                           !default;
+
+$grid-list-img-background-color:  $content-img-background-color               !default;
+$grid-list-img-border:            $content-img-border                         !default;
+$grid-list-img-border-radius:     0                                           !default;
+$grid-list-img-box-shadow:        $content-img-box-shadow                     !default;
+$grid-list-img-padding:           0                                           !default;
+
+$grid-list-heading-box-shadow:    none                                        !default;
+$grid-list-heading-text-shadow:   none                                        !default;
+
+$grid-list-p-text-shadow:         none                                        !default;
+//$grid-list-p-hover:               $font-color                                 !default;
+
+
+@mixin grid-list() {
+
+	.grid-list ul,
+	ul.grid-list {
+		margin: 0 #{-$grid-margin};
+	}
+
+	.grid-list {
+		li {
+			$padding-quad: quad-expand($grid-list-item-padding);
+
+			@if unit($grid-list-item-width) == "" {
+			  width: grid-width($grid-list-item-width, nth($padding-quad,2), nth($padding-quad,4));
+			} @else {
+				width: $grid-list-item-width;
+			}
+			display: inline;
+			float: left;
+			margin: 0 $grid-margin $grid-list-item-margin-bottom;
+			padding: $grid-list-item-padding;
+			position: relative;
+
+			> a {
+				display: block;
+				> * {
+					color: $font-color;
+					@include transition-property('color');
+					@include transition-duration('.3s');
+				}
+				img {
+					background-color: $grid-list-img-background-color;
+					border: $grid-list-img-border;
+					@include border-radius($grid-list-img-border-radius);
+					@include box-shadow($grid-list-img-box-shadow);
+					padding: $grid-list-img-padding;
+				}
+				p {
+					text-shadow: $grid-list-p-text-shadow;
+				}
+				.grid-item-info > *:hover { text-decoration: none; }
+			}
+			&:hover {
+				a > * { color: $link-hover-color; }
+				a img { border-color: $link-hover-color; }
+			}
+		}
+	}
+}
