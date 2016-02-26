@@ -1,0 +1,44 @@
+/**
+ * Miscellaneous Utilities
+ *
+ * @author Drake Cooper
+ * @link http://www.drakecooper.com
+ * @copyright (c) 2012, Drake Cooper. All rights reserved.
+ * @info This is a custom file and may not be used, modified, or reproduced
+ * without express permission of Drake Cooper.
+ */
+
+
+
+// Turns an optimized quad into a four-item list
+// Usage example: padding-left: nth(quad-expand($my-padding),4);
+@function quad-expand($quad) {
+	@if length($quad) == 1 {
+		@return ($quad $quad $quad $quad);
+	}
+	@else if length($quad) == 2 {
+		@return (nth($quad, 1) nth($quad, 2) nth($quad, 1) nth($quad, 2));
+	}
+	@else if length($quad) == 3 {
+		@return (nth($quad, 1) nth($quad, 2) nth($quad, 3) nth($quad, 2));
+	}
+	@else {
+		@return $quad;
+	}
+}
+
+
+// Contracts your quad if possible
+@function quad-contract($t, $r, $b, $l) {
+	@if $r == $l {
+		@if $t == $b {
+			@if $t == $r {
+				@return $t;
+			}
+			@else { @return $t $r; }
+		}
+		@else { @return $t $r $b; }
+	}
+	@else { @return $t $r $b $l; }
+}
+

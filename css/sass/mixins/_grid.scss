@@ -1,0 +1,269 @@
+///**
+// * This css is based on the grid system provided by 960.gs.
+// * Learn more about 960.gs http://960.gs/
+// *
+// * @author David R. Casey
+// * @link http://www.studiocasey.com/
+// * @copyright (c) 2011, David R. Casey, Studio Casey. All rights reserved.
+// *
+// *
+// * Instead of adding the 960 grid classes to the HTML, use SASS to input the
+// * grid directly into the CSS.
+// *
+// * header { @include grid(4); }
+// *
+// */
+
+$grid-page-width:   960px !default; // wide option 1400px
+$grid-columns:      24    !default; // wide option 35
+$grid-margin:       10px  !default;
+
+// Some useful helper variables
+$grid-gutter:       $grid-margin * 2;
+$grid-column:       $grid-page-width / $grid-columns - $grid-gutter;
+
+$grid-full:         $grid-columns;
+$grid-half:         $grid-columns * .5;
+$grid-third:        $grid-columns / 3;
+$grid-twothird:     $grid-columns * 2 / 3;
+$grid-quarter:      $grid-columns * .25;
+$grid-threequarter: $grid-columns * .75;
+$grid-fifth:        $grid-columns * .2;
+$grid-twofifth:     $grid-columns * .4;
+$grid-threefifth:   $grid-columns * .6;
+$grid-fourfifth:    $grid-columns * .8;
+$grid-sixth:        $grid-columns / 6;
+
+
+// This should be added to the page CSS.
+//body { min-width:$grid-page-width; }
+@mixin container($r:0, $l:0) {
+	margin-left: auto;
+	margin-right: auto;
+	max-width: $grid-page-width - $r - $l;
+}
+@mixin alpha($margin-left:0) { margin-left: $margin-left; }
+@mixin omega($margin-right:0) { margin-right: $margin-right; }
+@mixin prefix($prefix-size:1) {
+	padding-left: ($grid-page-width / $grid-columns) * $prefix-size;
+}
+@mixin suffix($suffix-size:1) {
+	padding-right: ($grid-page-width / $grid-columns) * $suffix-size;
+}
+@mixin push($push-size:1) {
+	position:relative;
+	left: ($grid-page-width / $grid-columns) * $push-size;
+}
+@mixin push-ext($push-size:1) {
+	position:relative;
+	left: ($grid-page-width / $grid-columns) * $push-size - $grid-margin;
+}
+@mixin pull($pull-size:1) {
+	@include push(0 - $pull-size);
+}
+@mixin pull-ext($pull-size:1) {
+	@include push-ext(0 - $pull-size);
+}
+@function grid-width-ext($grid-size:1) {
+	@return ($grid-page-width / $grid-columns) * $grid-size;
+}
+@mixin grid-width-ext($grid-size:1) {
+	width: grid-width-ext($grid-size);
+}
+@function grid-width($grid-size:1, $r:0, $l:0) {
+	@return ($grid-page-width / $grid-columns) * $grid-size - $grid-gutter - $r - $l;
+}
+@mixin grid-width($grid-size:1, $r:0, $l:0) {
+	width: grid-width($grid-size, $r, $l);
+}
+@mixin grid($grid-size:1, $t:0, $r:0, $b:0, $l:0) {
+	display: inline;
+	float: left;
+	margin-left: $grid-margin;
+	margin-right: $grid-margin;
+	width: grid-width($grid-size, $r, $l);
+
+	$p: quad-contract($t, $r, $b, $l);
+	@if $p != 0 {
+		padding: $p;
+	}
+}
+@mixin split($split-size:1) {
+	margin-left: ($grid-page-width / $grid-columns * $split-size + $grid-gutter) / 2;
+	margin-right: ($grid-page-width / $grid-columns * $split-size + $grid-gutter) / 2;
+}
+
+
+///**
+// * Implement the 960 grid system in your HTML
+// * http://960.gs/
+// *
+// * Easily add this mixin to the body:
+// *   body { include grid960; }
+// */
+
+@mixin grid960 {
+	.container_12, .container_16, .container_20 { @include container; }
+	.grid_1 { @include grid;  }
+	@for $i from 1 through $grid-columns {
+		@if $i != 1 {
+			.grid_#{$i} {
+				@extend .grid_1;
+				@include grid-width($i);
+			}
+		}
+		.push_#{$i}   { @include push($i);   }
+		.pull_#{$i}   { @include pull($i);   }
+		.prefix_#{$i} { @include prefix($i); }
+		.suffix_#{$i} { @include suffix($i); }
+	}
+	.alpha  { @include alpha; }
+	.omega  { @include omega; }
+}
+
+
+///**
+// * Implement the grid system in your HTML using fractional widths
+// * Uses the similar syntax as the 960 grid
+// *
+// * Easily add this mixin to the body:
+// *   body { include gridFractional; }
+// */
+
+@mixin gridFractional {
+	.grid_full           { @include grid($grid-full);        }
+	.grid_half           { @extend .grid_full; @include grid-width($grid-half);        }
+	.grid_third          { @extend .grid_full; @include grid-width($grid-third);       }
+	.grid_twothird       { @extend .grid_full; @include grid-width($grid-twothird);    }
+	.grid_quarter        { @extend .grid_full; @include grid-width($grid-quarter);     }
+	.grid_threequarter   { @extend .grid_full; @include grid-width($grid-threequarter);}
+	.grid_fifth          { @extend .grid_full; @include grid-width($grid-fifth);       }
+	.grid_twofifth       { @extend .grid_full; @include grid-width($grid-twofifth);    }
+	.grid_threefifth     { @extend .grid_full; @include grid-width($grid-threefifth);  }
+	.grid_fourfifth      { @extend .grid_full; @include grid-width($grid-fourfifth);   }
+	.grid_sixth          { @extend .grid_full; @include grid-width($grid-sixth);       }
+
+	.push_half           { @include push($grid-half);        }
+	.push_third          { @include push($grid-third);       }
+	.push_twothird       { @include push($grid-twothird);    }
+	.push_quarter        { @include push($grid-quarter);     }
+	.push_threequarter   { @include push($grid-threequarter);}
+	.push_fifth          { @include push($grid-fifth);       }
+	.push_twofifth       { @include push($grid-twofifth);    }
+	.push_threefifth     { @include push($grid-threefifth);  }
+	.push_fourfifth      { @include push($grid-fourfifth);   }
+	.push_sixth          { @include push($grid-sixth);       }
+
+	.pull_half           { @include pull($grid-half);        }
+	.pull_third          { @include pull($grid-third);       }
+	.pull_twothird       { @include pull($grid-twothird);    }
+	.pull_quarter        { @include pull($grid-quarter);     }
+	.pull_threequarter   { @include pull($grid-threequarter);}
+	.pull_fifth          { @include pull($grid-fifth);       }
+	.pull_twofifth       { @include pull($grid-twofifth);    }
+	.pull_threefifth     { @include pull($grid-threefifth);  }
+	.pull_fourfifth      { @include pull($grid-fourfifth);   }
+	.pull_sixth          { @include pull($grid-sixth);       }
+
+	.prefix_half         { @include prefix($grid-half);        }
+	.prefix_third        { @include prefix($grid-third);       }
+	.prefix_twothird     { @include prefix($grid-twothird);    }
+	.prefix_quarter      { @include prefix($grid-quarter);     }
+	.prefix_threequarter { @include prefix($grid-threequarter);}
+	.prefix_fifth        { @include prefix($grid-fifth);       }
+	.prefix_twofifth     { @include prefix($grid-twofifth);    }
+	.prefix_threefifth   { @include prefix($grid-threefifth);  }
+	.prefix_fourfifth    { @include prefix($grid-fourfifth);   }
+	.prefix_sixth        { @include prefix($grid-sixth);       }
+
+	.suffix_half         { @include suffix($grid-half);        }
+	.suffix_third        { @include suffix($grid-third);       }
+	.suffix_twothird     { @include suffix($grid-twothird);    }
+	.suffix_quarter      { @include suffix($grid-quarter);     }
+	.suffix_threequarter { @include suffix($grid-threequarter);}
+	.suffix_fifth        { @include suffix($grid-fifth);       }
+	.suffix_twofifth     { @include suffix($grid-twofifth);    }
+	.suffix_threefifth   { @include suffix($grid-threefifth);  }
+	.suffix_fourfifth    { @include suffix($grid-fourfifth);   }
+	.suffix_sixth        { @include suffix($grid-sixth);       }
+
+	.alpha  { @include alpha; }
+	.omega  { @include omega; }
+}
+
+
+///**
+// * Vertical Rhythm
+// * Learn more about vertical rhythm:
+// * http://24ways.org/2006/compose-to-a-vertical-rhythm
+// * http://www.alistapart.com/articles/settingtypeontheweb
+// *
+// * These mixins will help achieve vertical rhythm. It allows for programmatic
+// * incremental adjustment of padding and margins based on grid column width and
+// * baseline height. It also allows for fine tuning of pixels in case of borders.
+// *
+// * $v and $h are positioning variables. 0 <= $v <= 1
+// *    0  = bottom/left
+// *    .5 = middle
+// *    1  = top/right
+// *
+// * @author David R. Casey
+// * @link http://www.studiocasey.com/
+// * @copyright (c) 2011, David R. Casey, Studio Casey. All rights reserved.
+// */
+
+//$base-font-size: 13px !default;
+//$baseline:       20px !default;
+
+@function vertical-rhythm-add(
+										$add-baselines:0,    // The number of baselines to be added
+										$add-columns:0,      // The number of columns to be added
+										$v:.5,               // The vertical positioning, 0 <= $v <= 1, 0: bottom, .5: middle, 1: top
+										$h:.5,               // The horizontal positioning, 0 <= $v <= 1, 0: left, .5: middle, 1: right
+										$t:0,                // After the baselines have been added, add this many pixels to the top-padding
+										$r:0,                // After the columns have been added, add this many pixels to the right-padding
+										$b:0,                // After the baselines have been added, add this many pixels to the bottom-padding
+										$l:0,                // After the columns have been added, add this many pixels to the left-padding
+										$width:$grid-column, // The width of the object, i.e., modify the width by this much to get the desired padding to align to a column.
+										$height:$baseline    // The height of the object, i.e., modify the height by this much to get the desired padding to align to a baseline.
+									) {
+	$vPad: $add-baselines * $baseline - $height % ($baseline/1px);
+	$top:  round( $vPad * ( 1 - $v ) );
+	$t:    $top + $t;
+	$b:    round( $vPad - $top + $b );
+
+
+	$hPad: 0;
+	@if unitless($add-columns) {
+		$hPad: $add-columns * $grid-column - $width % ($grid-column/1px);
+	} @else {
+		$hPad: $add-columns;
+	}
+	$right:round( $hPad * ( 1 - $h ) );
+	$r:    $right + $r;
+	$l:    $hPad - $right + $l;
+
+	@return quad-contract($t, $r, $b, $l);
+}
+
+
+
+// Line Height
+@function line-height($font-size:$base-font-size, $modify:0) {
+	@return round( ceil( $font-size / $baseline ) * $baseline ) + $modify;
+}
+@mixin line-height($font-size:$base-font-size, $modify:0) {
+	line-height: line-height($font-size, $modify);
+}
+
+// Padding
+@mixin padding($add-baselines:0, $add-columns:0, $v:.5, $h:.5, $t:0, $r:0, $b:0, $l:0, $width:$grid-column, $height:$baseline) {
+	padding: vertical-rhythm-add($add-baselines, $add-columns, $v, $h, $t, $r, $b, $l, $width, $height);
+}
+
+// Margin
+// CAUTION: This will disrupt the margin on your grid item! Use wisely.
+@mixin margin($add-baselines:0, $add-columns:0, $v:.5, $h:.5, $t:0, $r:0, $b:0, $l:0, $width:$grid-column, $height:$baseline) {
+	margin: vertical-rhythm-add($add-baselines, $add-columns, $v, $h, $t, $r, $b, $l, $width, $height);
+}
+

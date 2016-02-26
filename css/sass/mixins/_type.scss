@@ -1,0 +1,569 @@
+/**
+ * Typographic layout styling and overrides.
+ *
+ * @author Drake Cooper
+ * @link http://www.drakecooper.com
+ * @copyright (c) 2011, Drake Cooper. All rights reserved.
+ * @info This is a custom file and may not be used, modified, or reproduced
+ * without express permission of Drake Cooper.
+ */
+
+
+$icon-grid:                       24px                                        !default;
+
+$base-font-family:                "Helvetica Neue",Helvetica,Arial,sans-serif !default;
+$base-font-size:                  13px                                        !default;
+$base-font-style:                 normal                                      !default;
+$base-font-weight:                normal                                      !default;
+$bold-font-weight:                bold                                        !default;
+$small-font-size:                 round( .85 * $base-font-size )              !default;
+$baseline:                        20px                                        !default;
+$base-line-height:                $baseline/$base-font-size !default; // default line-height for YUI fonts 1.231
+$font-color:                      #555                                        !default;
+
+$selected-font-color:             #fff                                        !default;
+$selected-background-color:       #ff9b00                                     !default;
+
+$link-color:                      #00e                                        !default;
+$link-hover-color:                #06e                                        !default;
+$link-active-color:               $link-color                                 !default;
+$link-visited-color:              #551a8b                                     !default;
+
+$h1-font-size:                    30px                                        !default;
+$h2-font-size:                    24px                                        !default;
+$h3-font-size:                    18px                                        !default;
+$h4-font-size:                    16px                                        !default;
+$h5-font-size:                    14px                                        !default;
+$h6-font-size:                    13px                                        !default;
+$th-font-size:                    13px                                        !default;
+$dt-font-size:                    13px                                        !default;
+
+$primary-heading-font-style:      normal                                      !default;
+$secondary-heading-font-style:    $primary-heading-font-style                 !default;
+$h1-font-style:                   $primary-heading-font-style                 !default;
+$h2-font-style:                   $primary-heading-font-style                 !default;
+$h3-font-style:                   $primary-heading-font-style                 !default;
+$h4-font-style:                   $secondary-heading-font-style               !default;
+$h5-font-style:                   $secondary-heading-font-style               !default;
+$h6-font-style:                   italic                                      !default;
+$th-font-style:                   $h6-font-style                              !default;
+$dt-font-style:                   $h6-font-style                              !default;
+
+$primary-heading-font-weight:     $bold-font-weight                           !default;
+$secondary-heading-font-weight:   $primary-heading-font-weight                !default;
+$h1-font-weight:                  $primary-heading-font-weight                !default;
+$h2-font-weight:                  $primary-heading-font-weight                !default;
+$h3-font-weight:                  $primary-heading-font-weight                !default;
+$h4-font-weight:                  $secondary-heading-font-weight              !default;
+$h5-font-weight:                  $secondary-heading-font-weight              !default;
+$h6-font-weight:                  $secondary-heading-font-weight              !default;
+$th-font-weight:                  $secondary-heading-font-weight              !default;
+$dt-font-weight:                  $secondary-heading-font-weight              !default;
+
+$primary-heading-font-family:     "Helvetica Neue",Helvetica,Arial,sans-serif !default;
+$secondary-heading-font-family:   $primary-heading-font-family                !default;
+$h1-font-family:                  $primary-heading-font-family                !default;
+$h2-font-family:                  $primary-heading-font-family                !default;
+$h3-font-family:                  $primary-heading-font-family                !default;
+$h4-font-family:                  $secondary-heading-font-family              !default;
+$h5-font-family:                  $secondary-heading-font-family              !default;
+$h6-font-family:                  $secondary-heading-font-family              !default;
+$th-font-family:                  $secondary-heading-font-family              !default;
+$dt-font-family:                  $secondary-heading-font-family              !default;
+
+$primary-heading-color:           #444                                        !default;
+$secondary-heading-color:         $primary-heading-color                      !default;
+$h1-color:                        $primary-heading-color                      !default;
+$h2-color:                        $primary-heading-color                      !default;
+$h3-color:                        $primary-heading-color                      !default;
+$h4-color:                        $secondary-heading-color                    !default;
+$h5-color:                        $secondary-heading-color                    !default;
+$h6-color:                        $secondary-heading-color                    !default;
+$th-color:                        $secondary-heading-color                    !default;
+$dt-color:                        $secondary-heading-color                    !default;
+
+$primary-subheading-color:        #bbb                                        !default;
+$secondary-subheading-color:      $primary-heading-color                      !default;
+$h1-subheading-color:             $primary-subheading-color                   !default;
+$h2-subheading-color:             $primary-subheading-color                   !default;
+$h3-subheading-color:             $primary-subheading-color                   !default;
+$h4-subheading-color:             $secondary-subheading-color                 !default;
+$h5-subheading-color:             $secondary-subheading-color                 !default;
+$h6-subheading-color:             $secondary-subheading-color                 !default;
+$th-subheading-color:             $secondary-subheading-color                 !default;
+$dt-subheading-color:             $secondary-subheading-color                 !default;
+
+$primary-heading-text-transform:  none                                        !default;
+$secondary-heading-text-transform:$primary-heading-text-transform             !default;
+$h1-text-transform:               $primary-heading-text-transform             !default;
+$h2-text-transform:               $primary-heading-text-transform             !default;
+$h3-text-transform:               $primary-heading-text-transform             !default;
+$h4-text-transform:               $secondary-heading-text-transform           !default;
+$h5-text-transform:               $secondary-heading-text-transform           !default;
+$h6-text-transform:               $secondary-heading-text-transform           !default;
+$th-text-transform:               $secondary-heading-text-transform           !default;
+$dt-text-transform:               $secondary-heading-text-transform           !default;
+
+// Content
+$content-link-decoration:         none                                        !default;
+$content-link-decoration-visited: $content-link-decoration                    !default;
+$content-link-decoration-active:  $content-link-decoration                    !default;
+$content-link-decoration-hover:   $content-link-decoration                    !default;
+
+$content-img-background-color:    transparent                                 !default;
+$content-img-border:              0 solid transparent                         !default;
+$content-img-border-radius:       0                                           !default;
+$content-img-box-shadow:          none                                        !default;
+$content-img-padding:             0                                           !default;
+
+$pull-quote-left-margin-left:     0                                           !default;
+$pull-quote-right-margin-right:   0                                           !default;
+$pull-quote-width:                200px                                       !default;
+$pull-quote-center-width:         250px                                       !default;
+
+// Horizontal rule
+$hr-border-color:                 desaturate(lighten($font-color, 20%), 2%)   !default;
+$hr-border-top:                   1px solid $hr-border-color                  !default;
+$hr-dotted-border-top:            1px dotted $hr-border-color                 !default;
+
+
+
+
+//------------------------------------------------------
+//
+//    General Typography Resets
+//
+//------------------------------------------------------
+
+@mixin type-reset() {
+
+	body {
+		color: $font-color;
+		font: $base-font-weight $base-font-size/#{$baseline} $base-font-family;
+		*font-size: small; // hack retained to preserve specificity
+	}
+
+	.p, p, address, blockquote, pre, ol, ul {
+		margin: 0 0 $baseline;
+		padding: 0;
+	}
+	table.p {
+		margin: 0 0 $baseline;
+		padding: 0;
+	}
+
+	// Misc Typography
+	b, strong { font-weight: $bold-font-weight; }
+	small {
+		font-size: $small-font-size;
+	//	@include margin(0, $height: $small-font-size);
+		line-height: $baseline;
+	}
+	sub, sup {
+		font-size: 75%;
+		line-height: 0;
+		position: relative;
+		vertical-align: baseline;
+	}
+	sub { top: -0.5em; }
+	sup { bottom: -.025em; }
+	cite { font-style: italic; }
+	blockquote:before, blockquote:after { content: ""; }
+	blockquote, q { quotes: "" ""; }
+	q:before { content: "\201C"; }
+	q:after { content: "\201D"; }
+	blockquote {
+		border-left: 5px solid #eee;
+		font-size: $base-font-size + 1;
+		font-weight: $base-font-weight;
+		line-height: $baseline;
+		padding-left: 15px;
+		&.text-right {
+			border: 0;
+			border-right: 5px solid #eee;
+			padding-left: 0;
+			padding-right: 15px;
+		}
+		small {
+			color: #bbb;
+			display: block;
+			font-size: $base-font-size - 1;
+			&:before { content: "— "; }
+		}
+	}
+
+	pre, code, kbd, samp {
+		font-family: Monaco,"Courier New",Courier,monospace,sans-serif;
+		font-size: $base-font-size * .85;
+		font-weight: normal;
+		line-height: 1;
+    -webkit-tab-size: 2;
+    -moz-tab-size: 2;
+    -o-tab-size: 2;
+    tab-size: 2;
+	}
+	code, pre { @include border-radius(3px); }
+	pre { line-height: $baseline; white-space: pre; white-space: pre-wrap; word-wrap: break-word; }
+	abbr[title], acronym[title] { border-bottom: 1px dotted; cursor: help; }
+	address {
+		font-style: normal;
+		abbr, abbr[title] {
+			border: 0;
+			display: inline-block;
+		}
+	}
+	address:last-child { background: none; }
+	hr {
+		background: none transparent;
+		border: 0;
+		border-top: $hr-border-top;
+		clear: both;
+		display: block;
+		height: 1px;
+		margin: 0 0 -1px+$baseline;
+		padding: 0;
+	}
+	hr.dotted {
+		background: none transparent;
+		border-top: $hr-dotted-border-top;
+	}
+
+	::-moz-selection { background: $selected-background-color; color: $selected-font-color; text-shadow: none; }
+	::selection { background: $selected-background-color; color: $selected-font-color; text-shadow: none; }
+	a:link { -webkit-tap-highlight-color: $selected-background-color; }
+}
+
+
+//------------------------------------------------------
+//
+//    Headings
+//    How to make a subheading (<br> is opt.):
+//    <hX>Heading<br><small>Subhead</small></hX>
+//
+//------------------------------------------------------
+
+@mixin type-headings() {
+
+	h1, h2, h3, h4, h5, h6,
+	.h1, .h2, .h3, .h4, .h5, .h6  {
+		clear: both;
+		margin: 0;
+		small {
+			font-size: 70%; // watch for dependents on this size, e.g., _forms.scss label.small padding
+			font-weight: normal;
+			line-height: 1;
+		}
+	}
+	h1, .h1 {
+		color: $h1-color;
+		font: $h1-font-style $h1-font-weight $h1-font-size $h1-font-family;
+		@include line-height($h1-font-size * .7);
+		@include padding(2);
+		text-transform: $h1-text-transform;
+		small { color: $h1-subheading-color; }
+	}
+	h2, .h2 {
+		color: $h2-color;
+		font: $h2-font-style $h2-font-weight $h2-font-size $h2-font-family;
+		@include line-height($h2-font-size);
+		@include padding(1);
+		text-transform: $h2-text-transform;
+		small { color: $h2-subheading-color; }
+	}
+	h3, .h3 {
+		color: $h3-color;
+		font: $h3-font-style $h3-font-weight $h3-font-size $h3-font-family;
+		@include line-height($h3-font-size);
+		@include padding(1);
+		text-transform: $h3-text-transform;
+		small { color: $h3-subheading-color; }
+	}
+	h4, .h4 {
+		color: $h4-color;
+		font: $h4-font-style $h4-font-weight $h4-font-size $h4-font-family;
+		@include line-height($h4-font-size);
+		@include padding(1);
+		text-transform: $h4-text-transform;
+		small { color: $h4-subheading-color; }
+	}
+	h5, .h5 {
+		color: $h5-color;
+		font: $h5-font-style $h6-font-weight $h5-font-size $h5-font-family;
+		@include line-height( $h5-font-size);
+		text-transform: $h5-text-transform;
+		small { color: $h5-subheading-color; }
+	}
+	h6, .h6 {
+		color: $h6-color;
+		font: $h6-font-style $h6-font-weight $h6-font-size $h6-font-family;
+		@include line-height($h6-font-size);
+		text-transform: $h6-text-transform;
+		small { color: $h6-subheading-color; }
+	}
+	th {
+		color: $th-color;
+		font: $th-font-style $th-font-weight $base-font-size $th-font-family;
+		@include line-height($base-font-size);
+		text-transform: $th-text-transform;
+		small { color: $th-subheading-color; }
+	}
+	thead th {
+		font: $th-font-style $th-font-weight $th-font-size $th-font-family;
+		@include line-height($th-font-size);
+	}
+	dt {
+		clear: both;
+		color: $dt-color;
+		font: $dt-font-style $dt-font-weight $dt-font-size $dt-font-family;
+		@include line-height($dt-font-size);
+		text-transform: $dt-text-transform;
+		small { color: $dt-subheading-color; }
+	}
+}
+
+
+//------------------------------------------------------
+//
+//    Anchors
+//
+//------------------------------------------------------
+
+@mixin type-anchors() {
+
+	h1 a, h1 a:link, h1 a:visited, h1 a:active, a h1, a:link h1, a:visited h1, a:active h1,
+	h2 a, h2 a:link, h2 a:visited, h2 a:active, a h2, a:link h2, a:visited h2, a:active h2,
+	h3 a, h3 a:link, h3 a:visited, h3 a:active, a h3, a:link h3, a:visited h3, a:active h3,
+	h4 a, h4 a:link, h4 a:visited, h4 a:active, a h4, a:link h4, a:visited h4, a:active h4,
+	h5 a, h5 a:link, h5 a:visited, h5 a:active, a h5, a:link h5, a:visited h5, a:active h5,
+	h6 a, h6 a:link, h6 a:visited, h6 a:active, a h6, a:link h6, a:visited h6, a:active h6 {
+		color: $link-color;
+		text-decoration: none;
+		@include transition-property('background-color' 'color' 'border-color');
+		@include transition-duration('0.3s');
+	}
+
+	h1 a:hover, a:hover h1,
+	h2 a:hover, a:hover h2,
+	h3 a:hover, a:hover h3,
+	h4 a:hover, a:hover h4,
+	h5 a:hover, a:hover h5,
+	h6 a:hover, a:hover h6 {
+		border: none;
+		color: $link-hover-color;
+		text-decoration: none;
+	}
+
+	a, a p span{ @include transition-property('background-color' 'color' 'border-color');
+							 @include transition-duration('0.3s');
+							 color: $link-color;
+							 text-decoration: none; }
+
+	a:visited  { color: $link-visited-color;  text-decoration:none; }
+	a:active   { color: $link-active-color;   text-decoration:none; outline:0; }
+	a:hover    { color: $link-hover-color;    text-decoration:none; outline:0; }
+	*:focus {
+		outline: transparent thin dotted;
+		@include transition-property('outline-color');
+		@include transition-duration('1s');
+		@include transition-delay('1.5s');
+	}
+
+	#content {
+		p a          { text-decoration: $content-link-decoration; }
+		p a:visited  { text-decoration: $content-link-decoration-visited; }
+		p a:active   { text-decoration: $content-link-decoration-active; }
+		p a:hover    { text-decoration: $content-link-decoration-hover; }
+	}
+
+	a, a:visited, a:active, a:hover {
+		p {
+			color: $font-color;
+			text-decoration: none;
+	}}
+
+	a p span       { color: $link-color; }
+	a p span:after { content: '\00A0\00BB'; }//'\00A0\203a'; }
+	a:hover p span { color: $link-hover-color; text-decoration: none; }
+	a:hover p span:after { content: '\2002\2002\00BB'; }
+	a[href^="tel:"] { white-space: nowrap; }
+}
+
+@mixin type-file-type-anchors() {
+	a[href$=".pdf"],
+	a[href$=".txt"],
+	a[href$=".doc"],
+	a[href$=".docx"],
+	a[href$=".xls"],
+	a[href$=".xlsx"],
+	a[href$=".ppt"],
+	a[href$=".pptx"],
+	a[href$=".zip"],
+	a[href$=".gzip"],
+	a[href$=".tar"] {
+		white-space: nowrap;
+	}
+	.filetype-icon {
+		background: url(#{$IMAGES_PATH}/icons-sprite-24.png) no-repeat scroll transparent;
+		content: "";
+		display: inline-block;
+		height: $baseline;
+		vertical-align: top;
+		width: $icon-grid - 5;
+	}
+	a[href$=".pdf"]:before {
+		@extend .filetype-icon;
+		background-position: -221px -314px;
+	}
+	a[href$=".txt"]:before {
+		@extend .filetype-icon;
+		background-position: -125px -314px;
+	}
+	a[href$=".doc"]:before,
+	a[href$=".docx"]:before {
+		@extend .filetype-icon;
+		background-position: -149px -314px;
+	}
+	a[href$=".xls"]:before,
+	a[href$=".xlsx"]:before {
+		@extend .filetype-icon;
+		background-position: -173px -314px;
+	}
+	a[href$=".ppt"]:before,
+	a[href$=".pptx"]:before {
+		@extend .filetype-icon;
+		background-position: -197px -314px;
+	}
+	a[href$=".zip"]:before,
+	a[href$=".gzip"]:before,
+	a[href$=".tar"]:before {
+		@extend .filetype-icon;
+		background-position: -100px -314px;
+	}
+}
+
+//------------------------------------------------------
+//
+//    Text Align
+//
+//------------------------------------------------------
+
+@mixin type-text-align() {
+
+	.text-left   { text-align: left; }
+	.text-center { text-align: center; }
+	.text-right  { text-align: right; }
+
+	th { text-align: left; }
+	table.text-left td, table.text-left th     { text-align: left; }
+	table.text-center td, table.text-center th { text-align: center; }
+	table.text-right td, table.text-right th   { text-align: right; }
+}
+
+
+//------------------------------------------------------
+//
+//    Inline Images, Pull Quotes, and Div's
+//
+//------------------------------------------------------
+
+@mixin type-images-pull-quotes() {
+
+	#content img {
+		background-color: $content-img-background-color;
+		border: $content-img-border;
+		@include border-radius($content-img-border-radius);
+		@include box-shadow($content-img-box-shadow);
+		padding: $content-img-padding;
+	}
+	.alignleft {
+		@include margin($add-baselines:1, $v:.8, $r:$grid-margin*2);
+		float: left;
+	}
+	.alignright {
+		@include margin($add-baselines:1, $v:.8, $l:$grid-margin*2);
+		float: right;
+	}
+	.aligncenter {
+		display: block;
+		margin: 0 auto $baseline;
+		text-align: center;
+		img {
+			margin-left: $grid-margin;
+			margin-right: $grid-margin;
+			vertical-align: top;
+			&:first-child, &.first { margin-left: 0; }
+			&:last-child,  &.last { margin-right: 0; } // Need jQuery for <= IE8 if using :last-child
+		}
+	}
+	table.alignleft, table.aligncenter, table.alignright { display: table; }
+
+	// pullquotes
+	h2, h3, h4, h5, h6 {
+		&.alignleft, &.alignright {
+			@include line-height($h4-font-size);
+			@include padding($add-baselines:1, $v:.8);
+			width: $pull-quote-width;
+		}
+		&.alignleft { @include margin($r:$grid-margin*2, $l:$pull-quote-left-margin-left); }
+		&.alignright { @include margin($l:$grid-margin*2, $r:$pull-quote-right-margin-right); }
+		&.aligncenter {
+			margin: 0 auto $baseline;
+			width: $pull-quote-center-width;
+		}
+	}
+}
+
+
+// wordpress
+@mixin type-wordpress() {
+
+	.wp-caption {
+		text-align: center;
+		margin-bottom: 18px;
+		padding: 9px 5px 0;
+	}
+	.wp-caption img,
+	.wp-caption a img {
+		margin: 0;
+		padding: 0;
+	}
+	.wp-caption p.wp-caption-text {
+		margin: 0;
+		padding: 18px 5px;
+	}
+	.gallery-icon {
+		border: 1px solid #ccc;
+		margin: 0 5px;
+		padding-top: 6px;
+	}
+	.gallery img {
+		margin: 0;
+	}
+	.gallery-caption {
+		padding: 6px 6px 0;
+	}
+	.wp-smiley { // Prevent the smileys from breaking line-height
+		max-height: 12px;
+		margin: 0 !important;
+	}
+}
+
+
+//------------------------------------------------------
+//
+//    Quick Includes
+//
+//------------------------------------------------------
+
+@mixin type() {
+	@include type-reset;
+	@include type-headings;
+	@include type-anchors;
+	@include type-text-align;
+	@include type-images-pull-quotes;
+}
+
+@mixin type-kitchen-sink() {
+	@include type;
+	@include type-wordpress;
+}
